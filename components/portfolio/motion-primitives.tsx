@@ -18,6 +18,16 @@ export const stagger: Variants = {
   visible: { transition: { staggerChildren: 0.1 } },
 }
 
+export const powerOnReveal: Variants = {
+  hidden: { opacity: 0, y: 20, scale: 0.97 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] },
+  },
+}
+
 export function Reveal({
   children,
   className,
@@ -52,11 +62,13 @@ export function MagneticButton({
   className,
   href,
   onClick,
+  style,
 }: {
   children: React.ReactNode
   className?: string
   href?: string
   onClick?: () => void
+  style?: React.CSSProperties
 }) {
   const ref = useRef<HTMLDivElement>(null)
   const x = useMotionValue(0)
@@ -77,7 +89,12 @@ export function MagneticButton({
   }
 
   const inner = href ? (
-    <a href={href} className={cn('inline-flex items-center gap-2', className)}>
+    <a
+      href={href}
+      className={cn('inline-flex items-center gap-2', className)}
+      style={style}
+      data-interactive
+    >
       {children}
     </a>
   ) : (
@@ -85,6 +102,8 @@ export function MagneticButton({
       type="button"
       onClick={onClick}
       className={cn('inline-flex items-center gap-2', className)}
+      style={style}
+      data-interactive
     >
       {children}
     </button>
@@ -114,7 +133,10 @@ export function SectionHeading({
 }) {
   return (
     <Reveal className={cn('mb-12 md:mb-16', className)}>
-      <p className="mb-3 font-mono text-xs uppercase tracking-[0.3em] text-primary">
+      <p
+        className="mb-3 font-mono text-xs uppercase tracking-[0.3em]"
+        style={{ color: 'oklch(0.65 0.22 225)' }}
+      >
         {eyebrow}
       </p>
       <h2 className="font-serif text-3xl font-medium text-balance md:text-4xl lg:text-5xl">

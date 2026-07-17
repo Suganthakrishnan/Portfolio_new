@@ -1,28 +1,36 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
-import { Space_Grotesk, Inter } from 'next/font/google'
+import { Space_Grotesk, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 
 const heading = Space_Grotesk({
   subsets: ['latin'],
   variable: '--font-heading',
+  weight: ['300', '400', '500', '600', '700'],
 })
 
-const body = Inter({
+const mono = JetBrains_Mono({
   subsets: ['latin'],
   variable: '--font-body',
+  weight: ['300', '400', '500'],
 })
 
 export const metadata: Metadata = {
-  title: 'Sugantha Krishnan — Electronics & Communication Engineer',
+  title: 'Sugantha Krishnan — Embedded Systems · AI · Software Engineer',
   description:
-    'Portfolio of Sugantha Krishnan. Building intelligent systems where AI, Embedded Systems and Software Engineering meet.',
-  generator: 'v0.app',
+    'Portfolio of Sugantha Krishnan — ECE engineer building intelligent hardware products that fuse Embedded Systems, PCB Design, Artificial Intelligence and Software Engineering.',
+  keywords: ['Embedded Systems', 'AI', 'PCB Design', 'STM32', 'Machine Learning', 'ECE', 'Portfolio'],
+  authors: [{ name: 'Sugantha Krishnan' }],
+  openGraph: {
+    title: 'Sugantha Krishnan — Embedded Systems × AI Engineer',
+    description: 'Building intelligent products at the intersection of hardware and AI.',
+    type: 'website',
+  },
 }
 
 export const viewport: Viewport = {
   colorScheme: 'dark',
-  themeColor: '#0b0a12',
+  themeColor: '#080c12',
 }
 
 export default function RootLayout({
@@ -31,7 +39,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`bg-background ${heading.variable} ${body.variable}`}>
+    <html lang="en" className={`bg-background ${heading.variable} ${mono.variable}`}>
       <body className="antialiased">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
